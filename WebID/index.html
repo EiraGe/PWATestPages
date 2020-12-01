@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width" />
+<meta name="google-signin-client_id" content="756916960051-7ajkfavuf3j9mk3s2eflg02kifa1t6ih.apps.googleusercontent.com">
 <link rel="manifest" href="manifest.json">
 <title>Long Long Test Page</title>
 <style>
@@ -24,10 +25,15 @@
   margin: 0 0 8px 0;
   padding-top: 8px; padding-bottom: 8px;
   background-color: rgba(255, 0, 0, .1);
+  display: none;
 }
 </style>
 <script src="https://apis.google.com/js/platform.js?onload=ginit" async defer></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=2842343212758598&autoLogAppEvents=1" nonce="uwuG1mgb"></script>
+
+<script src="./base.js"></script>
+<script src="./gLogin.js"></script>
+<script src="./fbLogin.js"></script>
 
 <body>
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
@@ -43,21 +49,6 @@
 
 <script>
 document.logIn = '';
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js')
-        .then((reg) => {
-          console.log('Service worker registered.', reg);
-        });
-  });
-}
-
-function showResult(text) {
-    console.log(text)
-    result = document.getElementById("result");
-    result.innerHTML += "<li>" + text + "</li>";
-}
-
 
 function signOut() {
   if (document.logIn === 'google') {
@@ -75,44 +66,3 @@ function signOut() {
 }
 </script>
 
-<script>
-function ginit() {
-  gapi.load('auth2', function() {
-    /* Ready. Make a call to gapi.auth2.init or some other API */
-    config = {
-      client_id: '756916960051-7ajkfavuf3j9mk3s2eflg02kifa1t6ih.apps.googleusercontent.com',
-      ux_mode: 'redirect'
-    }
-  });
-}
-
-
-function onSignIn(googleUser) {
-  document.logIn = 'google'
-  var profile = googleUser.getBasicProfile();
-  result = 
-    `ID: ${profile.getId()} \n
-     Name: ${profile.getName()} \n
-     Image URL: ${profile.getImageUrl()} \n
-     Email: ${profile.getEmail()} \n`
-  showResult(result);
-}
-</script>
-
-<script>
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-}
-
-function statusChangeCallback(response) {
-  showResult(response.status)
-  if (response.status === 'connected') {
-    document.logIn = 'FB'
-    FB.api('/me', function(response) {
-      showResult('Successful login for: ' + response.name);
-    });
-  }
-}
-</script>
