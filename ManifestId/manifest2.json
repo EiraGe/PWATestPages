@@ -1,6 +1,6 @@
 {
-  "name": "Long Long Test Pages",
-  "short_name": "Long Long",
+  "name": "Long Long Manifest 2",
+  "short_name": "Manifest 2",
   "icons": [{
       "src": "/images/icon-192x192.png",
       "sizes": "192x192",
@@ -15,16 +15,5 @@
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
-  "shortcuts": [{
-    "name": "Shortcut name",
-    "description": "desc",
-    "url": "./p2.html",
-    "icons": [{
-      "src": "totoro_badge.png",
-      "type": "image/png",
-      "sizes": "96x96",
-      "purpose": "any"
-    }]
-  }],
-  "id": "LongLong"
+  "id": "LongLongId2"
 }
